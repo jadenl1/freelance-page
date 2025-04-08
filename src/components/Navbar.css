@@ -53,3 +53,28 @@
     transform: translateY(0);
     opacity: 0.6;
 }
+
+
+@media (max-width: 768px) {
+    .navbar-container{
+        width: calc(100% - 40px);
+        padding: 0 20px;
+    }
+    .navbar{
+        width: 100%;
+        height: 50px;
+    }
+
+    .navbar > *:first-of-type{
+        display: none;
+    }
+
+    .navbar > *{
+        font-size: 15px;
+    }
+
+    .navbar-button::after, .footer-button::after{
+        content: none;
+        display: none;
+    }
+}

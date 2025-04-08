@@ -208,7 +208,6 @@
     width: 100%;
     max-width: 600px;
     margin: 40px auto 80px auto;
-    padding: 20px;
     text-align: center;
     cursor: default;
     opacity: 1;
@@ -225,7 +224,7 @@
     font-weight: 400;
     color: var(--off-black);
     transition: color 0.3s ease;
-    opacity: 0.3;
+    opacity: 0.5;
     transition: 0.3s;
   }
 
@@ -336,4 +335,63 @@
       width: auto;
       height: auto;
     }
+
+    .content-title{
+        font-size: 30px;
+        max-width: 80%;
+    }
+
+
+    .expertise-table {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      .table-row{
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .read-more, .icon-content, .icon-wrapper{ 
+        display: none;
+      }
+
+      
+      .skill-row {
+        margin: 10px 0;
+      }
+      
+      .skill-word {
+        display: inline-block;
+        margin: 0 10px;
+        font-size: 15px;
+        font-weight: 400;
+        color: var(--off-black);
+        transition: color 0.3s ease;
+        opacity: 0.5;
+        transition: 0.3s;
+      }
+    
+      .skill-word:hover {
+        color: var(--primary);
+        opacity: 1;
+      }
+    
+      .skill-row:last-of-type > span{
+        color: var(--primary) !important;
+        opacity: 1 !important;
+      }
+    
+      .carousel {
+        height: 300px;
+      }
+      
+      .carousel-track img {
+        height: 300px;
+      }
+
+   .content {
+     margin-bottom: 50px;
+   }
+
   }
