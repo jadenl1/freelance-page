@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Navbar.css';
 
-const Navbar = ({ scrollToSection }) => {
+const Navbar = ({ scrollToSection, setPopup }) => {
   return (
     <div className="navbar-container">
       <div className="navbar">
@@ -9,7 +9,7 @@ const Navbar = ({ scrollToSection }) => {
         <p className="navbar-button" onClick={() => scrollToSection("home")}>Teryn</p>
         <p className="navbar-button" onClick={() => scrollToSection("about")}>About Us</p>
         <p className="navbar-button" onClick={() => scrollToSection("work")}>Our Work</p>
-        <p className="navbar-button" onClick={() => scrollToSection("project")}>Start Project</p>
+        <p className="navbar-button" onClick={() => {setPopup(true)}}>Start Project</p>
       </div>
     </div>
   );

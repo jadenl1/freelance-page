@@ -9,9 +9,12 @@ import { IoLogoFigma } from "react-icons/io5";
 import { TbApi } from "react-icons/tb";
 import { PiBracketsCurlyBold } from "react-icons/pi";
 import { FaRobot } from "react-icons/fa";
+import FormPopup from "./components/FormPopup";
 
 function App() {
   const [expandedIndex, setExpandedIndex] = useState(null);
+
+  const [popup, setPopup] = useState(false);
 
   // Create refs for each section
   const homeRef = useRef(null);
@@ -117,12 +120,17 @@ function App() {
 
   return (
     <>
-      <Navbar scrollToSection={scrollToSection} />
+      <Navbar scrollToSection={scrollToSection} setPopup={setPopup} />
       <div className="background" />
+
+      {popup && (
+        <FormPopup setPopup={setPopup}/>
+      )}
+
       <div className="title" ref={homeRef}>
         <h1 className="title-text">Teryn</h1>
         <p className="title-subtext">See your visions come to life.</p>
-        <button className="title-button">Get Started ➝</button>
+        <button className="title-button" onClick={()=>{setPopup(true)}}>Get Started ➝</button>
       </div>
       <div className="content">
         <h2 className="content-title" ref={aboutRef}>
@@ -182,7 +190,7 @@ function App() {
       {/* Footer Section */}
       <div className="footer">
         <h2 className="footer-text">Teryn</h2>
-        <p className="footer-button">Make Something Today ➝</p>
+        <p className="footer-button" onClick={()=>{setPopup(true)}}>Make Something Today ➝</p>
       </div>
     </>
   );
