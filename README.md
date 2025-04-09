@@ -1,1 +1,1 @@
-# Freelance Page (https://freelance-page.onrender.com/)
+# Freelance Page (teryn.app)
