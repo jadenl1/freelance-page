@@ -14,7 +14,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 30%;
+    width: 40%;
     padding: 8px 0;
     border-radius: 8px;
     box-shadow: 0 2px 10px var(--subtle-shadow);

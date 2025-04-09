@@ -1,25 +1,24 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 
 // Expertise Icon imports
 import { IoIosApps } from "react-icons/io";
-import { FaBrain, FaGlobe } from "react-icons/fa";
+import { FaBrain, FaGlobe, FaCheck, FaRobot } from "react-icons/fa";
 import { IoLogoFigma } from "react-icons/io5";
 import { TbApi } from "react-icons/tb";
 import { PiBracketsCurlyBold } from "react-icons/pi";
-import { FaRobot } from "react-icons/fa";
 import FormPopup from "./components/FormPopup";
 
 function App() {
   const [expandedIndex, setExpandedIndex] = useState(null);
-
   const [popup, setPopup] = useState(false);
 
   // Create refs for each section
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const workRef = useRef(null);
+  const pricingRef = useRef(null);
 
   // Expertise data array remains unchanged
   const expertise = [
@@ -30,10 +29,10 @@ function App() {
       icon: <IoIosApps />
     },
     {
-        title: "Smart Automation",
-        description:
-          "We specialize in automating your business, enhancing efficiency and productivity through custom scripts and intelligent automatic decision making that understands your customer- effortlessly driving your business forward.",
-        icon: <FaRobot />
+      title: "Smart Automation",
+      description:
+        "We specialize in automating your business, enhancing efficiency and productivity through custom scripts and intelligent automatic decision making that understands your customer—effortlessly driving your business forward.",
+      icon: <FaRobot />
     },
     {
       title: "User Interfaces",
@@ -71,34 +70,6 @@ function App() {
     setExpandedIndex(expandedIndex === index ? null : index);
   };
 
-  // Listen for scroll events to change the color scheme once user scrolled past 50vh (unchanged)
-  useEffect(() => {
-    const handleThemeChange = () => {
-      if (window.scrollY > window.innerHeight / 2) {
-        document.body.classList.add("new-theme");
-      } else {
-        document.body.classList.remove("new-theme");
-      }
-    };
-
-    window.addEventListener("scroll", handleThemeChange);
-    return () => window.removeEventListener("scroll", handleThemeChange);
-  }, []);
-
-  // Define the skills rows (the skills blob section)
-  const skillsRows = useMemo(() => [
-    ["React.JS", "Python"],
-    ["Stripe", "Express", "ReactNative"],
-    ["Firebase", "MongoDB", "Photoshop", "Illustrator"],
-    ["Premiere", "Lightroom", "AfterEffects", "Unity"],
-    ["AdobeXD", "Figma", "Google Cloud", "TensorFlow"],
-    ["PyTorch", "Docker", "Flask", "C", "C#", "API", "C++"],
-    ["Java", "R", "Github", "NodeJS", "Rust", "OCaml"],
-    ["Ruby", "Kotlin", "Angular", "Tailwind", "NextJS"],
-    ["SQL", "PostgreSQL", "MySQL"],
-    ["And Much More."]
-  ], []);
-
   // Carousel images
   const carouselImages = [
     require("./assets/gallery/1.png"),
@@ -123,20 +94,23 @@ function App() {
       <Navbar scrollToSection={scrollToSection} setPopup={setPopup} />
       <div className="background" />
 
-      {popup && (
-        <FormPopup setPopup={setPopup}/>
-      )}
+      {popup && <FormPopup setPopup={setPopup} />}
 
       <div className="title" ref={homeRef}>
         <h1 className="title-text">Teryn</h1>
-        <p className="title-subtext">See your visions come to life.</p>
-        <button className="title-button" onClick={()=>{setPopup(true)}}>Get Started ➝</button>
+        <p className="title-subtext">Watch your visions come to life.</p>
+        <button className="title-button" onClick={() => setPopup(true)}>
+          Get Started ➝
+        </button>
       </div>
+
       <div className="content">
         <h2 className="content-title" ref={aboutRef}>
           At Teryn, we craft tailored software solutions with precision and dedication.
           Whether it’s web, desktop, or beyond, we handle it all—built just for you.
         </h2>
+
+        {/* Expertise Table Section */}
         <div className="expertise-table">
           {expertise.map((item, index) => (
             <div
@@ -160,17 +134,83 @@ function App() {
           ))}
         </div>
 
-        {/* Skills Blob Section */}
-        <div className="skills-blob">
-          {skillsRows.map((row, rowIndex) => (
-            <div key={rowIndex} className="skill-row">
-              {row.map((skill, index) => (
-                <span key={index} className="skill-word">
-                  {skill}
-                </span>
-              ))}
+        {/* Pricing Section */}
+        <div className="pricing-card">
+          <h2>Flexible & Fair Pricing</h2>
+          <p>
+            At Teryn, we work very closely with our customers to create fully customizable pricing that fits your unique needs.
+            Whether your project is small or large, our flexible approach ensures you get the best value and level of service.
+          </p>
+          <ul className="pricing-checklist">
+            <li><FaCheck /> Complete top to bottom production</li>
+            <li><FaCheck /> Full communication from start to end</li>
+            <li><FaCheck /> Work directly with our team</li>
+            <li><FaCheck /> Schedule meetings</li>
+            <li><FaCheck /> Last moment requests</li>
+            <li><FaCheck /> Production level software</li>
+            <li><FaCheck /> No hidden fees</li>
+          </ul>
+        </div>
+
+        {/* 3-Step Process Section */}
+        <div className="process-section">
+          <h2>We can do it all, or even just a step.</h2>
+          <div className="process-container">
+            <div className="process-circle">
+              <p>Consultation & Discovery</p>
             </div>
-          ))}
+            <div className="process-line"></div>
+            <div className="process-circle">
+              <p>Design & Development</p>
+            </div>
+            <div className="process-line"></div>
+            <div className="process-circle">
+              <p>Launch & Support</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Reviews Section */}
+        {/* Reviews Section */}
+        <div className="reviews-section">
+        <div className="review">
+            <div className="review-header">
+                <div className="review-image" id="review-img-1"></div>
+                <div className="review-details">
+                    <h3>Rohan</h3>
+                    <p className="review-subtitle">Startup CFO</p>
+                </div>
+            </div>
+            <p className="review-quote">
+            "Working with Teryn was fantastic! They totally understood our vibe and made the project a fun ride 😊. I’m impressed with every step!"
+            </p>
+        </div>
+        <div className="review-separator"></div>
+        <div className="review">
+            <div className="review-header">
+                <div className="review-image" id="review-img-2"></div>
+                <div className="review-details">
+                    <h3>Lisa</h3>
+                    <p className="review-subtitle">Local Business Owner</p>
+                </div>
+            </div>
+            <p className="review-quote">
+            "Really made our online presence stand out! Super-friendly team kept us engaged through the whole process."
+            </p>
+        </div>
+        <div className="review-separator"></div>
+        <div className="review">
+            <div className="review-header">
+                <div className="review-image" id="review-img-3"></div>
+                <div className="review-details">
+                    <h3>Jason</h3>
+                    <p className="review-subtitle">Entrepreneur</p>
+                </div>
+            </div>
+            <p className="review-quote">
+            "I felt like Teryn was not just a service but a tech savvy friend! Their creative solutions really got my startup buzzing."
+            </p>
+        </div>
         </div>
 
         {/* Carousel Section */}
@@ -190,7 +230,9 @@ function App() {
       {/* Footer Section */}
       <div className="footer">
         <h2 className="footer-text">Teryn</h2>
-        <p className="footer-button" onClick={()=>{setPopup(true)}}>Make Something Today ➝</p>
+        <p className="footer-button" onClick={() => setPopup(true)}>
+          Make Something Today ➝
+        </p>
       </div>
     </>
   );
