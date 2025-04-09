@@ -84,6 +84,7 @@ function App() {
     if (section === "home") ref = homeRef;
     else if (section === "about") ref = aboutRef;
     else if (section === "work") ref = workRef;
+    else if (section === "pricing") ref = pricingRef;
     if (ref && ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
@@ -135,7 +136,7 @@ function App() {
         </div>
 
         {/* Pricing Section */}
-        <div className="pricing-card">
+        <div className="pricing-card" ref={pricingRef}>
           <h2>Flexible & Fair Pricing</h2>
           <p>
             At Teryn, we work very closely with our customers to create fully customizable pricing that fits your unique needs.

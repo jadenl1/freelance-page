@@ -5,7 +5,7 @@
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background-color: transparent;
+    background-color: #00215e;
   }
   ::-webkit-scrollbar-thumb {
     background-color: var(--primary);
@@ -22,7 +22,7 @@
   .background {
     width: 600px;
     height: 600px;
-    background-color: var(--primary);
+    background-color: #002d80;
     border-radius: 50%;
     filter: blur(100px);
     position: absolute;
@@ -57,7 +57,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color: var(--off-white);
+    color: var(--primary);
     text-align: center;
   }
   
@@ -280,7 +280,6 @@
 /* Process Section Styles */
 .process-section {
     text-align: center;
-    /* margin: 100px auto; */
     max-width: 800px;
   }
   
@@ -310,11 +309,6 @@
     color: var(--popup-white);
     font-weight: 400;
     z-index: 1;
-  }
-
-  .process-circle h3 {
-    margin: 0;
-    font-size: 20px;
   }
   
   .process-circle p {
@@ -376,6 +370,10 @@
   
   .pricing-card h2 {
     margin-top: 0;
+    margin-bottom: 0;
+    color: var(--primary);
+    font-weight: 400;
+    font-size: 30px;
   }
   
   .pricing-card p {
@@ -394,6 +392,7 @@
     align-items: center;
     margin-bottom: 10px;
     font-size: 15px;
+    opacity: 0.9;
   }
   
   .pricing-checklist li svg {
@@ -478,7 +477,7 @@
   /*************************************************
    *  Responsive Adjustments
    *************************************************/
-  @media screen and (max-width: 650px) {
+  @media screen and (max-width: 700px) {
     .background {
       width: 80vw;
       height: 80vw;
@@ -563,5 +562,35 @@
    .content {
      margin-bottom: 50px;
    }
+
+    .process-section{
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .process-container{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .process-section > h2{
+        margin: 20px 50px;
+    }
+
+    .process-circle{
+        margin: 0;
+        width: 100px;
+        height: 100px;
+    }
+
+    .process-line{
+        display: none;
+    }
+
+    .pricing-card{
+        margin: 100px 10px;
+    }
 
   }
