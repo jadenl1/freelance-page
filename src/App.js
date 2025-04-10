@@ -183,7 +183,7 @@ function App() {
                 </div>
             </div>
             <p className="review-quote">
-            "Working with Teryn was fantastic! They totally understood our vibe and made the project a fun ride 😊. I’m impressed with every step!"
+            "Working with Teryn was fantastic. They totally understood our vibe and made the project a fun ride 😊. I’m impressed with every step!"
             </p>
         </div>
         <div className="review-separator"></div>
@@ -196,7 +196,7 @@ function App() {
                 </div>
             </div>
             <p className="review-quote">
-            "Really made our online presence stand out! Super-friendly team kept us engaged through the whole process."
+            "Really made our online presence stand out :) Super-friendly team kept us engaged through the whole process."
             </p>
         </div>
         <div className="review-separator"></div>
@@ -209,7 +209,7 @@ function App() {
                 </div>
             </div>
             <p className="review-quote">
-            "I felt like Teryn was not just a service but a tech savvy friend! Their creative solutions really got my startup buzzing."
+            "I felt like Teryn was not just a service but a tech savvy friend- Their creative solutions really got my startup buzzing."
             </p>
         </div>
         </div>

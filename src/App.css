@@ -22,9 +22,9 @@
   .background {
     width: 600px;
     height: 600px;
-    background-color: #002d80;
+    background-color: var(--secondary);
     border-radius: 50%;
-    filter: blur(100px);
+    filter: blur(130px);
     position: absolute;
     top: calc(50% - 300px);
     left: calc(50% - 300px);
@@ -64,6 +64,11 @@
   .title-text {
     margin: 0;
     font-size: 70px;
+
+    opacity: 0;
+    animation: float-up 0.5s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
   }
   
   .title-subtext {
@@ -72,6 +77,11 @@
     margin-bottom: 30px;
     font-size: 18px;
     font-weight: 400;
+
+    opacity: 0;
+    animation: float-up 0.5s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 0.7s;
   }
   
   .title-button {
@@ -83,7 +93,31 @@
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
+
+    transition: 0.3s;
+
+    opacity: 0;
+    animation: float-up 0.5s ease;
+    animation-fill-mode: forwards;
+    animation-delay: 0.9s;
   }
+
+  .title-button:hover {
+    background-color: var(--primary);
+    color: var(--off-black);
+  }
+
+  @keyframes float-up{
+    0% {
+        opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
 
   /*************************************************
    *  Content Section
@@ -334,7 +368,7 @@
     width: calc(100% - 10px);
     height: 100px;
     margin: 0;
-    background-color: #0f1f4e;
+    background-color: var(--secondary);
     color: var(--primary);
     display: flex;
     align-items: center;
@@ -403,7 +437,7 @@
 
   /* Reviews Section */
 .reviews-section {
-    width: 800px;
+    width:500px;
     max-width: 90%;
     margin: 50px auto;
     margin-bottom: 100px;
@@ -429,13 +463,13 @@
   
 /* Apply distinct circular gradients for each review */
 #review-img-1 {
-    background: radial-gradient(circle at 30% 70%, #ab3d21, #145554);
+    background: radial-gradient(circle at 30% 70%, var(--primary), var(--secondary));
   }
   #review-img-2 {
-    background: radial-gradient(circle at 80% 20%, #972f50, #564e00);
+    background: radial-gradient(circle at 80% 20%, var(--primary), var(--secondary));
   }
   #review-img-3 {
-    background: radial-gradient(circle at 20% 40%, #003870, #7d7d24);
+    background: radial-gradient(circle at 20% 40%, var(--primary), var(--secondary));
   }
   
   .review-details {
