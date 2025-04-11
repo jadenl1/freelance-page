@@ -1,14 +1,15 @@
 import React, { useRef, useState } from 'react';
 import "./FormPopup.css";
 
+// Import the function you wrote in another file
+import { sendProjectRequest } from '../ApiFunctions';
+
 const FormPopup = ({ setPopup }) => {
     const [closing, setClosing] = useState(false);
 
     const name = useRef(null);
     const email = useRef(null);
     const desc = useRef(null);
-
-    const recipientEmail = ""; // Add the recipient email address here
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,24 +21,14 @@ const FormPopup = ({ setPopup }) => {
         };
 
         try {
-            const response = await fetch('localhost:4000/send-project-req', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    to: recipientEmail,
-                    subject: `Teryn - New Project Request`,
-                    message: `From ${formData.name}, ${formData.email}.\n\nDescription: ${formData.desc}`
-                })
-            });
+            // Use your imported function instead of fetch
+            const result = await sendProjectRequest(
+                'terynapp@gmail.com',
+                'Teryn - New Project Request',
+                `From ${formData.name}, ${formData.email}.\n\nDescription: ${formData.desc}`
+            );
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
-            console.log('Email sent:', data);
+            console.log('Email sent successfully:', result);
         } catch (error) {
             console.error('Error sending email:', error);
         }
@@ -67,7 +58,7 @@ const FormPopup = ({ setPopup }) => {
                         <label>Your Email</label>
                         <input ref={email} type="email" placeholder="A good email we can respond to..." required />
                         <label>Describe Your Project</label>
-                        <textarea ref={desc} placeholder="Get into the details about the tech and your budget..." rows={8} required></textarea>
+                        <textarea ref={desc} placeholder="Get into the details about the tech and your budget..." rows={8} required />
                         <button type="submit" className="navbar-button">
                             Start the Conversation ➝
                         </button>
