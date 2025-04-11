@@ -1,6 +1,6 @@
 async function sendProjectRequest(to, subject, message) {
     try {
-        const response = await fetch('http://localhost:4000/send-project-req', {
+        const response = await fetch('https://freelance-page-api.onrender.com/send-project-req', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
