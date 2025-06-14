@@ -1,632 +1,362 @@
-  /*************************************************
-   *  Custom Scrollbar (optional)
-   *************************************************/
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background-color: #00215e;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
-    border-radius: 4px;
-    transition: background-color 0.3s ease-in-out;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--primary);
-  }
-  
-  /*************************************************
-   *  Background Circle (Animated Pulse)
-   *************************************************/
-  .background {
-    width: 600px;
-    height: 600px;
-    background-color: var(--secondary);
-    border-radius: 50%;
-    filter: blur(130px);
-    position: absolute;
-    top: calc(50% - 300px);
-    left: calc(50% - 300px);
-    z-index: -1;
-    transition: all 0.5s linear;
-    animation: pulse 20s infinite;
-    animation-delay: 0.5s;
-  }
-  
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(0.6);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  
-  /*************************************************
-   *  Title / Hero Section
-   *************************************************/
-  .title {
+.App {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: var(--white);
+}
+
+.section {
+    width: 800px;
+}
+
+.hero {
+    position: relative;
     width: 100vw;
     height: 100vh;
-    margin-bottom: 100px;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: var(--primary);
-    text-align: center;
-  }
-  
-  .title-text {
-    margin: 0;
-    font-size: 70px;
+    overflow: hidden;
+}
 
-    opacity: 0;
-    animation: float-up 0.5s ease;
-    animation-fill-mode: forwards;
-    animation-delay: 0.5s;
-  }
-  
-  .title-subtext {
-    margin: 0;
-    margin-top: 5px;
-    margin-bottom: 30px;
-    font-size: 18px;
-    font-weight: 400;
-
-    opacity: 0;
-    animation: float-up 0.5s ease;
-    animation-fill-mode: forwards;
-    animation-delay: 0.7s;
-  }
-  
-  .title-button {
-    background-color: var(--off-black);
-    color: var(--off-white);
-    border: none;
-    border-radius: 8px;
-    padding: 15px 30px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-
-    transition: 0.3s;
-
-    opacity: 0;
-    animation: float-up 0.5s ease;
-    animation-fill-mode: forwards;
-    animation-delay: 0.9s;
-  }
-
-  .title-button:hover {
-    background-color: var(--primary);
-    color: var(--off-black);
-  }
-
-  @keyframes float-up{
-    0% {
-        opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-      transform: translateY(0px);
-    }
-  }
-
-
-  /*************************************************
-   *  Content Section
-   *************************************************/
-   .content {
-    width: 100vw;
-    margin-bottom: 100px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 0;
-    position: relative;
-  }
-  
-  .content-title {
-    font-size: 30px;
-    font-weight: 500;
-    color: var(--primary);
-    text-align: center;
-    margin: 0;
-    margin-bottom: 100px;
-    max-width: 750px;
-    transition: color 0.5s;
-  }
-  
-/*************************************************
- *  Rivora-Style Two-Column Table
- *************************************************/
- .expertise-table {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  /* New container wrapping each row and its description */
-  .table-row-container {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
-    cursor: pointer;
-    transition: border-color 0.3s;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-  }
-  
-  /* Remove border from the inner table-row */
-  .table-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 15px;
-  }
-  
-  /* Left text style */
-  .table-row span:first-child {
-    color: var(--off-black);
-    font-size: 16px;
-    font-weight: 500;
-    text-align: left;
-  }
-  
-  /* Icon wrapper containing both icon and Read More/Less text */
-  .icon-wrapper {
-    position: relative;
-    width: 40px;
-    height: 40px;
-  }
-  
-  /* Both icon and read-more text positioned absolutely */
-  .icon-content,
-  .read-more {
+.hero::before {
+    content: "";
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.2s;
-  }
-  
-  /* Icon visible by default */
-  .icon-content {
-    opacity: 0.5;
-    font-size: 20px;
-  }
-  
-  /* "Read More" text hidden by default */
-  .read-more {
-    opacity: 0;
-    font-size: 15px;
-    color: var(--primary);
-    width: 100px;
-  }
-  
-  /* Optional hover swap effect on container */
-  .table-row-container:hover .icon-content {
-    opacity: 0;
-  }
-  .table-row-container:hover .read-more {
-    opacity: 1;
-  }
-  
-  /*************************************************
-   *  Row Description (Expandable Text)
-   *************************************************/
-  .row-description {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    font-size: 15px;
-    color: var(--off-black);
-    transition: max-height 0.3s, opacity 0.3s, margin-bottom 0.3s;
-  }
-  
-  /* When expanded, reveal the description */
-  .row-description.expanded {
-    max-height: 150px; /* Adjust as needed */
-    opacity: 0.7;
-    margin-bottom: 15px;
-  }
+    top: -10vh;
+    left: 0;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle at top left, rgba(7, 143, 255, 0.25), transparent 70%);
+    filter: blur(80px);
+    z-index: 0;
+}
 
-  /*************************************************
- *  Skills Cloud (Technology Names as a Blob)
- *************************************************/
- .skills-blob {
-    width: 100%;
-    max-width: 600px;
-    margin: 40px auto 80px auto;
-    text-align: center;
-    cursor: default;
-    opacity: 1;
-  }
-  
-  .skill-row {
-    margin: 20px 0;
-  }
-  
-  .skill-word {
-    display: inline-block;
-    margin: 0 20px;
-    font-size: 20px;
-    font-weight: 400;
-    color: var(--off-black);
-    transition: color 0.3s ease;
-    opacity: 0.5;
-    transition: 0.3s;
-  }
-
-  .skill-word:hover {
-    color: var(--primary);
-    opacity: 1;
-  }
-
-  .skill-row:last-of-type > span{
-    color: var(--primary) !important;
-    opacity: 1 !important;
-  }
-
-  /*************************************************
- *  Carousel Section
- *************************************************/
-.carousel {
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
-    position: relative;
-    /* margin-top: 100px; */
-    margin: 0;
-  }
-  
-  .carousel-track {
-    display: flex;
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -100px;
+    width: 40vw;
     height: 100%;
-    /* Animate a translation to the left;
-       Duplicated images allow a seamless infinite loop */
-    animation: scrollCarousel 25s linear infinite;
-  }
-  
-  .carousel-track img {
-    height: 500px;
-    width: auto;
-    margin-right: 10px;
-    border-radius: 8px;
-  }
-  
-  /* Keyframes for continuous scrolling.
-     The translation distance should equal the width of one set of images.
-     Using 100% here assumes that the duplicated content is exactly double the original set. */
-  @keyframes scrollCarousel {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-155%);
-    }
-  }
+    background: radial-gradient(circle at top right, rgba(7, 143, 255, 0.25), transparent 70%);
+    filter: blur(60px);
+    z-index: 0;
+}
 
-
-/* Process Section Styles */
-.process-section {
-    text-align: center;
-    max-width: 800px;
-  }
-  
-  .process-section h2 {
-    font-size: 30px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    color: var(--primary);
-  }
-  
-  .process-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
-  }
-  
-  .process-circle {
+.hero-content {
     position: relative;
-    width: 200px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 10px;
-    color: var(--popup-white);
-    font-weight: 400;
     z-index: 1;
-  }
-  
-  .process-circle p {
-    margin: 5px 0 0;
-    font-size: 20px;
-    opacity: 1;
-    color: var(--off-black);
-  }
-  
-  .process-line {
-    height: 1px;
-    background-color: var(--off-black);
-    width: 80px;
-    opacity: 0.2;
-  }
-  
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+    color: var(--white);
+}
 
-/*************************************************
-    *  Footer Section
-    *************************************************/
-
-  .footer {
-    width: calc(100% - 10px);
-    height: 100px;
+.main-title {
+    font-size: 90px;
+    font-weight: 600;
+    line-height: 80px;
     margin: 0;
-    background-color: var(--secondary);
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    margin: 5px;
-    border-radius: 8px;
-    justify-content: space-between;
-  }
+}
 
-  .footer-text{
-    margin-left: 50px;
-  }
-
-  .footer-button::after{
-    background-color: var(--primary) !important;
-  }
-
-  .footer-button{
-    position: relative;
-    top: 2px;
-    margin-right: 50px;
-  }
-
-  /* Pricing Card Styles */
-.pricing-card {
-    background-color: #0f1f4e;
-    color: var(--off-black);
-    padding: 30px;
-    border-radius: 8px;
-    margin: 100px auto;
-    max-width: 600px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .pricing-card h2 {
-    margin-top: 0;
-    margin-bottom: 0;
-    color: var(--primary);
-    font-weight: 400;
-    font-size: 30px;
-  }
-  
-  .pricing-card p {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    font-weight: 300;
-  }
-  
-  .pricing-checklist {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .pricing-checklist li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    font-size: 15px;
-    opacity: 0.9;
-  }
-  
-  .pricing-checklist li svg {
-    margin-right: 10px;
-    color: var(--primary);
-  }
-
-  /* Reviews Section */
-.reviews-section {
-    width:500px;
-    max-width: 90%;
-    margin: 50px auto;
-    margin-bottom: 100px;
-    padding: 20px 0;
-  }
-  
-  .review {
-    padding: 20px 0;
-  }
-  
-  .review-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .review-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  
-/* Apply distinct circular gradients for each review */
-#review-img-1 {
-    background: radial-gradient(circle at 30% 70%, var(--primary), var(--secondary));
-  }
-  #review-img-2 {
-    background: radial-gradient(circle at 80% 20%, var(--primary), var(--secondary));
-  }
-  #review-img-3 {
-    background: radial-gradient(circle at 20% 40%, var(--primary), var(--secondary));
-  }
-  
-  .review-details {
-    margin-left: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .review-details h3 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--off-black);
-  }
-  
-  .review-subtitle {
-    margin: 0;
-    font-size: 14px;
+.main-subtitle {
     opacity: 0.7;
-    color: var(--off-black);
-  }
-  
-  .review-quote {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+.button {
+    font-family: "DM Sans", sans-serif;
+    background-color: var(--button-background);
+    border: 1px solid var(--button-border);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 100px;
     font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    backdrop-filter: blur(20px);
+    transition: 0.3s;
+}
+
+.button.is-primary {
+    background-color: var(--button-primary-background);
+    border: 1px solid var(--button-primary-border);
+    color: var(--white);
+}
+
+.button.is-primary:hover {
+    background-color: var(--button-primary-background-active);
+}
+
+.button:hover {
+    background-color: var(--button-background-active);
+}
+
+
+.quote{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.quote-text{
     font-weight: 300;
-    line-height: 1.5;
-    opacity: 0.8;
-    color: var(--off-black);
+    font-size: 32px;
+    color: var(--white);
     margin: 0;
-  }
-  
-  /* Separator line between reviews */
-  .review-separator {
-    height: 1px;
-    background-color: var(--off-black);
-    opacity: 0.3;
-    margin: 20px 0;
-  }
+    opacity: 0.6;
+    text-align: center;
+    justify-self: center;
+}
 
-  /*************************************************
-   *  Responsive Adjustments
-   *************************************************/
-  @media screen and (max-width: 700px) {
-    .background {
-      width: 80vw;
-      height: 80vw;
-      top: calc(50% - 40vw);
-      left: calc(50% - 40vw);
-    }
-    .title-text {
-      font-size: 50px;
-    }
-    .content-title {
-      font-size: 24px;
-    }
-    .table-row-container {
-      margin-bottom: 10px;
-    }
-    .table-row {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .table-row span:first-child {
-      margin-bottom: 10px;
-    }
-    .icon-wrapper {
-      width: auto;
-      height: auto;
+
+/* ——— EXPERTISE LIST (expandable rows) ——— */
+
+.expertise-table {
+  max-width: 600px;
+  margin: 0 auto 100px;
+}
+
+.table-row-container {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  transition: border-color 0.3s;
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-row span:first-child {
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.icon-wrapper {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.icon-content,
+.read-more {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s;
+}
+
+.icon-content {
+  opacity: 0.6;
+  font-size: 20px;
+  color: var(--button-primary-background);
+}
+
+.read-more {
+  opacity: 0;
+  font-size: 14px;
+  color: var(--white);
+  width: 80px;
+  text-align: center;
+}
+
+.table-row-container:hover .icon-content {
+  opacity: 0;
+}
+
+.table-row-container:hover .read-more {
+  opacity: 1;
+}
+
+.row-description {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s;
+  color: var(--white);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.row-description.expanded {
+  max-height: 150px; /* adjust if you need more space */
+  opacity: 0.8;
+  margin-top: 12px;
+}
+
+/* ——— REVIEWS GRID ——— */
+
+.reviews-section {
+  max-width: 900px;
+  margin: 0 auto 100px;
+  text-align: left;
+}
+
+.reviews-title {
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--white);
+  margin: 0;
+  text-align: center;
+}
+
+.reviews-subtitle{
+    margin-bottom: 40px;
+    opacity: 0.6;
+  text-align: center;
+  width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 14px;
+}
+
+.review-card {
+  position: relative;
+  background-color: var(--button-background);
+  border: 1px solid rgba(132, 200, 255, 0.242);
+  padding: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.review-text {
+  font-size: 15px;
+  opacity: 0.6;
+  color: var(--white);
+  margin: 0;
+  font-weight: 300;
+}
+
+.review-header {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+    color: var(--white);
+    margin-bottom: 10px;
+}
+
+.review-name{
+    font-weight: 400;
+    color: var(--white);
+    margin: 0;
+    font-size: 16px;
+}
+
+.review-company{
+    margin: 0;
+    opacity: 0.6;
+    font-weight: 400;
+}
+
+/* ——— PRICING SECTION ——— */
+.pricing-unified-card {
+  background-color: var(--button-background);
+  border: 1px solid var(--button-border);
+  border-radius: 14px;
+  margin: 40px auto 80px;
+  width: fit-content;
+  padding: 20px 50px;
+}
+
+.pricing-unified-card .pricing-features {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  max-width: 400px;
+}
+
+.pricing-unified-card .pricing-features li {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: var(--white);
+  margin-bottom: 12px;
+  opacity: 0.9;
+}
+
+.pricing-unified-card .pricing-features li svg {
+  margin-right: 10px;
+  color: var(--white);
+  opacity: 0.5;
+}
+
+.footer {
+  width: 95%;
+
+    margin-bottom: 8px;
+    padding: 20px;
+    color: var(--white);
+
+  font-size: 16px;
+  display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 800px) {
+    .section {
+        width: 100vw;
+        position: relative;
+        /* background-color: red; */
+        left: 3%;
     }
 
-    .content-title{
-        font-size: 30px;
-        max-width: 80%;
+    .hero::before {
+        display: none;
     }
 
+    .hero::after {
+        display: none;
+    }
+
+    .main-title{
+        font-size: 4rem;
+        line-height: 1;
+    }
+
+    .main-subtitle{
+        font-size: 1.1rem;
+        line-height: 1.2;
+    }
+
+    .button {
+        font-size: 1.3rem;
+        margin-top: 20px;
+    }
+
+    .quote-text{
+        font-size: 3rem;
+        max-width: 90%;
+    }
 
     .expertise-table {
-        width: 90%;
-        margin: 0 auto;
-      }
-
-      .table-row{
-        display: flex;
-        justify-content: space-between;
-      }
-
-      .read-more, .icon-content, .icon-wrapper{ 
-        display: none;
-      }
-
-      
-      .skill-row {
-        margin: 10px 0;
-      }
-      
-      .skill-word {
-        display: inline-block;
-        margin: 0 10px;
-        font-size: 15px;
-        font-weight: 400;
-        color: var(--off-black);
-        transition: color 0.3s ease;
-        opacity: 0.5;
-        transition: 0.3s;
-      }
-    
-      .skill-word:hover {
-        color: var(--primary);
-        opacity: 1;
-      }
-    
-      .skill-row:last-of-type > span{
-        color: var(--primary) !important;
-        opacity: 1 !important;
-      }
-    
-      .carousel {
-        height: 300px;
-      }
-      
-      .carousel-track img {
-        height: 300px;
-      }
-
-   .content {
-     margin-bottom: 50px;
-   }
-
-    .process-section{
-        display: flex;
-        flex-direction: column;
-
+        max-width: 90%;
+    }
+    .reviews-section {
+        max-width: 90%;
     }
 
-    .process-container{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+    .reviews-title{
+        font-size: 3rem;
+        margin-bottom: 20px;
     }
 
-    .process-section > h2{
-        margin: 20px 50px;
+    .reviews-subtitle {
+        width: 100%;
     }
-
-    .process-circle{
-        margin: 0;
-        width: 100px;
-        height: 100px;
-    }
-
-    .process-line{
-        display: none;
-    }
-
-    .pricing-card{
-        margin: 100px 10px;
-    }
-
-  }
+}

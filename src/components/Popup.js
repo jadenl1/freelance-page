@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import "./FormPopup.css";
+import "./Popup.css";
 
 // Import the function you wrote in another file
 import { sendProjectRequest } from '../ApiFunctions';
@@ -21,7 +21,6 @@ const FormPopup = ({ setPopup }) => {
         };
 
         try {
-            // Use your imported function instead of fetch
             const result = await sendProjectRequest(
                 'terynapp@gmail.com',
                 'Teryn - New Project Request',
@@ -52,14 +51,17 @@ const FormPopup = ({ setPopup }) => {
             <div className="popup-container" onClick={(e) => e.stopPropagation()}>
                 <div className={`popup-content ${closing ? "closing" : ""}`}>
                     <h2 className="popup-title">Let's Make Your Project.</h2>
-                    <form className="popup-form" onSubmit={handleSubmit}>
+                    <form className="popup-form">
                         <label>Your Name</label>
                         <input ref={name} type="text" placeholder="John Appleseed" required />
                         <label>Your Email</label>
                         <input ref={email} type="email" placeholder="A good email we can respond to..." required />
                         <label>Describe Your Project</label>
                         <textarea ref={desc} placeholder="Get into the details about the tech and your budget..." rows={8} required />
-                        <button type="submit" className="navbar-button">
+                        <button type="submit" className="popup-submit" onClick={(e)=>{
+                            handleSubmit(e);
+                            handleClose();
+                        }} >
                             Start the Conversation ➝
                         </button>
                     </form>

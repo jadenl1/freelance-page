@@ -1,26 +1,71 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar";
-
-// Expertise Icon imports
 import { IoIosApps } from "react-icons/io";
-import { FaBrain, FaGlobe, FaCheck, FaRobot } from "react-icons/fa";
+import { IoCheckmarkOutline } from "react-icons/io5";
+
+import { FaBrain, FaGlobe, FaRobot } from "react-icons/fa";
 import { IoLogoFigma } from "react-icons/io5";
 import { TbApi } from "react-icons/tb";
 import { PiBracketsCurlyBold } from "react-icons/pi";
-import FormPopup from "./components/FormPopup";
+
+import Navbar from "./components/Navbar";
+
+import Popup from "./components/Popup";
 
 function App() {
   const [expandedIndex, setExpandedIndex] = useState(null);
+
   const [popup, setPopup] = useState(false);
 
-  // Create refs for each section
-  const homeRef = useRef(null);
-  const aboutRef = useRef(null);
-  const workRef = useRef(null);
-  const pricingRef = useRef(null);
+const blobPositions = [
+  "0% 0%",    // top-left
+  "50% 0%",   // top-center
+  "100% 0%",  // top-right
+  "0% 100%",  // bottom-left
+  "50% 100%", // bottom-center
+  "100% 100%" // bottom-right
+];
 
-  // Expertise data array remains unchanged
+const reviews = [
+  {
+    name: "Sarah",
+    company: "Local Business Owner",
+    text:
+      "The team at Teryn made our complex requirements feel simple. Their clear communication kept us informed at every stage."
+  },
+  {
+    name: "David",
+    company: "Startup CFO",
+    text:
+      "Teryn’s automation solution saved us hours each week and freed up our staff to focus on growth initiatives. Truly transformative."
+  },
+  {
+    name: "Maria",
+    company: "Entrepreneur",
+    text:
+      "From initial design to final deployment, Teryn was responsive and professional. The user interface they built receives compliments daily."
+  },
+  {
+    name: "Alex",
+    company: "Local Business Owner",
+    text:
+      "We appreciated Teryn’s hands-on approach and technical expertise. They delivered a reliable product that exceeded our expectations."
+  },
+  {
+    name: "Jessica",
+    company: "E-commerce Manager",
+    text:
+      "Working with Teryn felt effortless. They really listened to our needs and delivered a site that boosted our online sales within weeks."
+  },
+  {
+    name: "Michael",
+    company: "Healthcare Director",
+    text:
+      "Teryn’s attention to detail impressed us. Their custom dashboard streamlined our patient scheduling in ways we hadn’t imagined."
+  },
+];
+
+
   const expertise = [
     {
       title: "Full-Stack Development",
@@ -31,7 +76,7 @@ function App() {
     {
       title: "Smart Automation",
       description:
-        "We specialize in automating your business, enhancing efficiency and productivity through custom scripts and intelligent automatic decision making that understands your customer—effortlessly driving your business forward.",
+        "We specialize in automating your business, enhancing efficiency and productivity through custom scripts and intelligent decision making that understands your customers—effortlessly driving your business forward.",
       icon: <FaRobot />
     },
     {
@@ -66,176 +111,128 @@ function App() {
     }
   ];
 
-  const handleRowClick = (index) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
-
-  // Carousel images
-  const carouselImages = [
-    require("./assets/gallery/1.png"),
-    require("./assets/gallery/2.jpg"),
-    require("./assets/gallery/3.png"),
-    require("./assets/gallery/4.png")
-  ];
-
-  // Function to scroll to a given section smoothly
-  const scrollToSection = (section) => {
-    let ref = null;
-    if (section === "home") ref = homeRef;
-    else if (section === "about") ref = aboutRef;
-    else if (section === "work") ref = workRef;
-    else if (section === "pricing") ref = pricingRef;
-    if (ref && ref.current) {
-      ref.current.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  };
+  const handleRowClick = (i) =>
+    setExpandedIndex(expandedIndex === i ? null : i);
 
   return (
-    <>
-      <Navbar scrollToSection={scrollToSection} setPopup={setPopup} />
-      <div className="background" />
+    <div className="App">
+        <Navbar />
 
-      {popup && <FormPopup setPopup={setPopup} />}
+        {popup && <Popup setPopup={setPopup} />}
 
-      <div className="title" ref={homeRef}>
-        <h1 className="title-text">Teryn</h1>
-        <p className="title-subtext">Watch your visions come to life.</p>
-        <button className="title-button" onClick={() => setPopup(true)}>
-          Get Started ➝
-        </button>
+      <div className="section hero" id="hero">
+        <div className="hero-content">
+          <h1 className="main-title">
+            Teryn
+            <br />
+            AI Solutions
+          </h1>
+          <p className="main-subtitle">
+            Automated solutions tailored to your company's needs.
+          </p>
+          <button className="button is-primary" onClick={() => setPopup(true)}>Get Started</button>
+        </div>
       </div>
 
-      <div className="content">
-        <h2 className="content-title" ref={aboutRef}>
-          At Teryn, we craft tailored software solutions with precision and dedication.
-          Whether it’s web, desktop, or beyond, we handle it all—built just for you.
+      <div className="section quote">
+        <h2 className="quote-text" id="services">
+          At Teryn, we craft tailored software solutions with precision and
+          dedication. Whether it’s web, desktop, or beyond, we handle it
+          all—built just for you.
         </h2>
+      </div>
 
-        {/* Expertise Table Section */}
+      <div className="section features">
         <div className="expertise-table">
-          {expertise.map((item, index) => (
+          {expertise.map((item, idx) => (
             <div
-              key={index}
-              className={`table-row-container ${expandedIndex === index ? "expanded" : ""}`}
-              onClick={() => handleRowClick(index)}
+              key={idx}
+              className={`table-row-container ${
+                expandedIndex === idx ? "expanded" : ""
+              }`}
+              onClick={() => handleRowClick(idx)}
             >
               <div className="table-row">
                 <span>{item.title}</span>
                 <span className="icon-wrapper">
                   <span className="icon-content">{item.icon}</span>
                   <span className="read-more">
-                    {expandedIndex === index ? "Read Less" : "Read More"}
+                    {expandedIndex === idx ? "Read Less" : "Read More"}
                   </span>
                 </span>
               </div>
-              <div className={`row-description ${expandedIndex === index ? "expanded" : ""}`}>
+              <div
+                className={`row-description ${
+                  expandedIndex === idx ? "expanded" : ""
+                }`}
+              >
                 {item.description}
               </div>
             </div>
           ))}
         </div>
-
-        {/* Pricing Section */}
-        <div className="pricing-card" ref={pricingRef}>
-          <h2>Flexible & Fair Pricing</h2>
-          <p>
-            At Teryn, we work very closely with our customers to create fully customizable pricing that fits your unique needs.
-            Whether your project is small or large, our flexible approach ensures you get the best value and level of service.
-          </p>
-          <ul className="pricing-checklist">
-            <li><FaCheck /> Complete top to bottom production</li>
-            <li><FaCheck /> Full communication from start to end</li>
-            <li><FaCheck /> Work directly with our team</li>
-            <li><FaCheck /> Schedule meetings</li>
-            <li><FaCheck /> Last moment requests</li>
-            <li><FaCheck /> Production level software</li>
-            <li><FaCheck /> No hidden fees</li>
-          </ul>
-        </div>
-
-        {/* 3-Step Process Section */}
-        <div className="process-section">
-          <h2>We can do it all, or even just a step.</h2>
-          <div className="process-container">
-            <div className="process-circle">
-              <p>Consultation & Discovery</p>
-            </div>
-            <div className="process-line"></div>
-            <div className="process-circle">
-              <p>Design & Development</p>
-            </div>
-            <div className="process-line"></div>
-            <div className="process-circle">
-              <p>Launch & Support</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Reviews Section */}
-        {/* Reviews Section */}
-        <div className="reviews-section">
-        <div className="review">
-            <div className="review-header">
-                <div className="review-image" id="review-img-1"></div>
-                <div className="review-details">
-                    <h3>Rohan</h3>
-                    <p className="review-subtitle">Startup CFO</p>
-                </div>
-            </div>
-            <p className="review-quote">
-            "Working with Teryn was fantastic. They totally understood our vibe and made the project a fun ride 😊. I’m impressed with every step!"
-            </p>
-        </div>
-        <div className="review-separator"></div>
-        <div className="review">
-            <div className="review-header">
-                <div className="review-image" id="review-img-2"></div>
-                <div className="review-details">
-                    <h3>Lisa</h3>
-                    <p className="review-subtitle">Local Business Owner</p>
-                </div>
-            </div>
-            <p className="review-quote">
-            "Really made our online presence stand out :) Super-friendly team kept us engaged through the whole process."
-            </p>
-        </div>
-        <div className="review-separator"></div>
-        <div className="review">
-            <div className="review-header">
-                <div className="review-image" id="review-img-3"></div>
-                <div className="review-details">
-                    <h3>Jason</h3>
-                    <p className="review-subtitle">Entrepreneur</p>
-                </div>
-            </div>
-            <p className="review-quote">
-            "I felt like Teryn was not just a service but a tech savvy friend- Their creative solutions really got my startup buzzing."
-            </p>
-        </div>
-        </div>
-
-        {/* Carousel Section */}
-        <div className="carousel" ref={workRef}>
-          <div className="carousel-track">
-            {carouselImages.map((src, index) => (
-              <img key={`img-${index}`} src={src} alt={`Gallery ${index + 1}`} />
-            ))}
-            {/* Duplicate images for smooth looping */}
-            {carouselImages.map((src, index) => (
-              <img key={`img-dup-${index}`} src={src} alt={`Gallery duplicate ${index + 1}`} />
-            ))}
-          </div>
-        </div>
       </div>
 
-      {/* Footer Section */}
-      <div className="footer">
-        <h2 className="footer-text">Teryn</h2>
-        <p className="footer-button" onClick={() => setPopup(true)}>
-          Make Something Today ➝
+         <div className="section reviews-section">
+        <h2 className="reviews-title" id="reviews">Don't just take our word for it.</h2>
+        <p className="reviews-subtitle">
+          No matter the size of your business or your industry, we have the
+          expertise to help you succeed. Check out what our clients have to say
+          about us.
         </p>
+        <div className="reviews-grid">
+          {reviews.map((r, i) => (
+            <div
+              key={i}
+              className="review-card"
+              style={{
+                backgroundImage: `radial-gradient(circle at ${
+                  blobPositions[i % blobPositions.length]
+                }, rgba(7, 143, 255, 0.2), transparent)`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "150% 150%"
+              }}
+            >
+              <div className="review-header">
+                <h3 className="review-name">{r.name}</h3>
+                <p className="review-company">{r.company}</p>
+              </div>
+              <p className="review-text">“{r.text}”</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </>
+
+      {/* Pricing */}
+      <div className="section pricing-section" id="pricing">
+            <h2 className="reviews-title">Fair + Flexible Pricing.</h2>
+            <p className="reviews-subtitle">
+                Every business gets access to our full suite of services — no confusing tiers, no hidden fees. 
+                We work closely with you to craft a custom quote that fits your goals, scope, and budget.
+            </p>
+
+            <div className="pricing-unified-card">
+                <ul className="pricing-features">
+                    <li><IoCheckmarkOutline /> Complete top-to-bottom production</li>
+                    <li><IoCheckmarkOutline /> Full communication from start to finish</li>
+                    <li><IoCheckmarkOutline /> Work directly with our engineering team</li>
+                    <li><IoCheckmarkOutline /> On-demand meetings & updates</li>
+                    <li><IoCheckmarkOutline /> Last-minute adjustments welcomed</li>
+                    <li><IoCheckmarkOutline /> Enterprise-grade, production-level software</li>
+                    <li><IoCheckmarkOutline /> No surprise fees — ever</li>
+                </ul>
+            </div>
+        </div>
+
+        <div className="section footer">
+        <p className="footer-text">
+          Teryn AI Solutions
+        </p>
+        <p className="footer-text">
+          Designed & Developed by Teryn
+        </p>
+        </div>
+    </div>
   );
 }
 
